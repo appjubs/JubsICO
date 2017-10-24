@@ -1,5 +1,12 @@
 pragma solidity ^0.4.15;
 
+/**
+ * @title JubsICO
+ * @Autor Daniel Marques (Dkdaniz)
+ * @dev see https://github.com/appjubs/JubsICO/blob/master/contracts/JubsICO.sol
+ */
+
+
 import './ERC20Basic.sol';
 import './StandardToken.sol';
 
