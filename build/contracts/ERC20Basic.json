@@ -85,10 +85,10 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.11;\n\n\n/**\n * @title ERC20Basic\n * @dev Simpler version of ERC20 interface\n * @dev see https://github.com/ethereum/EIPs/issues/179\n */\ncontract ERC20Basic {\n  uint256 public totalSupply;\n  function balanceOf(address who) public constant returns (uint256);\n  function transfer(address to, uint256 value) public returns (bool);\n  event Transfer(address indexed from, address indexed to, uint256 value);\n}\n",
-  "sourcePath": "/home/daniz/Documentos/JubsICO/JubsICO/contracts/ERC20Basic.sol",
+  "sourcePath": "/home/daniz/Documentos/Project/JubsICO/JubsICO/contracts/ERC20Basic.sol",
   "ast": {
     "attributes": {
-      "absolutePath": "/home/daniz/Documentos/JubsICO/JubsICO/contracts/ERC20Basic.sol",
+      "absolutePath": "/home/daniz/Documentos/Project/JubsICO/JubsICO/contracts/ERC20Basic.sol",
       "exportedSymbols": {
         "ERC20Basic": [
           148
@@ -466,5 +466,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.0",
-  "updatedAt": "2017-10-24T00:16:21.271Z"
+  "updatedAt": "2017-12-17T19:33:06.925Z"
 }

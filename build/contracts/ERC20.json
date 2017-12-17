@@ -180,10 +180,10 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.11;\n\n\nimport './ERC20Basic.sol';\n\n\n/**\n * @title ERC20 interface\n * @dev see https://github.com/ethereum/EIPs/issues/20\n */\ncontract ERC20 is ERC20Basic {\n  function allowance(address owner, address spender) public constant returns (uint256);\n  function transferFrom(address from, address to, uint256 value) public returns (bool);\n  function approve(address spender, uint256 value) public returns (bool);\n  event Approval(address indexed owner, address indexed spender, uint256 value);\n}\n",
-  "sourcePath": "/home/daniz/Documentos/JubsICO/JubsICO/contracts/ERC20.sol",
+  "sourcePath": "/home/daniz/Documentos/Project/JubsICO/JubsICO/contracts/ERC20.sol",
   "ast": {
     "attributes": {
-      "absolutePath": "/home/daniz/Documentos/JubsICO/JubsICO/contracts/ERC20.sol",
+      "absolutePath": "/home/daniz/Documentos/Project/JubsICO/JubsICO/contracts/ERC20.sol",
       "exportedSymbols": {
         "ERC20": [
           119
@@ -207,7 +207,7 @@
       {
         "attributes": {
           "SourceUnit": 149,
-          "absolutePath": "/home/daniz/Documentos/JubsICO/JubsICO/contracts/ERC20Basic.sol",
+          "absolutePath": "/home/daniz/Documentos/Project/JubsICO/JubsICO/contracts/ERC20Basic.sol",
           "file": "./ERC20Basic.sol",
           "scope": 120,
           "symbolAliases": [
@@ -737,5 +737,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.0",
-  "updatedAt": "2017-10-24T00:16:21.269Z"
+  "updatedAt": "2017-12-17T19:33:06.938Z"
 }
