@@ -14,7 +14,7 @@ import './Pausable.sol';
  * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
 contract StandardToken is ERC20, BasicToken, Pausable {
-
+    
   mapping (address => mapping (address => uint256)) allowed;
 
 
