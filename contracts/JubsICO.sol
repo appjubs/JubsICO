@@ -7,7 +7,7 @@ contract JubsICO is StandardToken {
     using SafeMath for uint256;
 
     //Information coin
-    string public name = "Honor";
+    string public name = "HONOR";
     string public symbol = "HNR";
     uint256 public decimals = 18;
     uint256 public totalSupply = 10 * (10*7) * (10 ** decimals); //100 000 000 HNR
@@ -25,10 +25,10 @@ contract JubsICO is StandardToken {
 
     //Utils ICO   
     uint256 public icoStage = 0;        
-    uint256 public tokensSold = 0;                      // total number of tokens sold
-    uint256 public totalRaised = 0;                     // total amount of money raised in wei
+    uint256 public tokensSold = 0;                      //total number of tokens sold
+    uint256 public totalRaised = 0;                     //total amount of money raised in wei
     uint256 public totalTokenToSale = 0;
-    uint256 public rate = 3500;                         // HNR/ETH rate / initial 50%
+    uint256 public rate = 3500;                         //HNR/ETH rate / initial 50%
     bool public pauseEmergence = false;                 //the owner address can set this to true to halt the crowdsale due to emergency
     
 
@@ -120,6 +120,7 @@ contract JubsICO is StandardToken {
 
     modifier acceptsFunds() {   
         if (icoStage == 0) {
+            require(msg.value >= 0.3);    
             require(now >= icoStartTimestampStage);          
             require(now <= icoEndTimestampStage); 
         }
