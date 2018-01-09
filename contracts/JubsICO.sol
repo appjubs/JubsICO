@@ -120,7 +120,7 @@ contract JubsICO is StandardToken {
 
     modifier acceptsFunds() {   
         if (icoStage == 0) {
-            require(msg.value >= 0.3);    
+            require(msg.value >= 1 ether);    
             require(now >= icoStartTimestampStage);          
             require(now <= icoEndTimestampStage); 
         }
