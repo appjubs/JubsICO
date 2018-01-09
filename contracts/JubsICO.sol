@@ -172,8 +172,9 @@ contract JubsICO is StandardToken {
         forwardFundsToWallet();
     } 
 
-    function forwardFundsToWallet() internal {        
-        walletETH.transfer(msg.value);              // immediately send Ether to wallet address, propagates exception if execution fails
+    function forwardFundsToWallet() internal { 
+        // immediately send Ether to wallet address, propagates exception if execution fails       
+        walletETH.transfer(msg.value);              
     }
 
     function assignTokens(address recipient, uint256 amount) internal {        
