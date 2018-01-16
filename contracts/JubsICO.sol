@@ -1,16 +1,17 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.16;
 
 import './ERC20Basic.sol';
 import './StandardToken.sol';
+
 
 contract JubsICO is StandardToken {
     using SafeMath for uint256;
 
     //Information coin
-    string public name = "HONOR";
+    string public name = "Honor";
     string public symbol = "HNR";
     uint256 public decimals = 18;
-    uint256 public totalSupply = 10 * (10*7) * (10 ** decimals); //10[0 000 000] HNR
+    uint256 public totalSupply = 100000000 * (10 ** decimals); //100 000 000 HNR
 
     //Adress informated in white paper 
     address public walletETH;                           //Wallet ETH
@@ -25,15 +26,17 @@ contract JubsICO is StandardToken {
 
     //Utils ICO   
     uint256 public icoStage = 0;        
-    uint256 public tokensSold = 0;                      //total number of tokens sold
-    uint256 public totalRaised = 0;                     //total amount of money raised in wei
+    uint256 public tokensSold = 0;                      // total number of tokens sold
+    uint256 public totalRaised = 0;                     // total amount of money raised in wei
     uint256 public totalTokenToSale = 0;
-    uint256 public rate = 3500;                         //HNR/ETH rate / initial 50%
+    uint256 public rate = 8500;                         // HNR/ETH rate / initial 50%
     bool public pauseEmergence = false;                 //the owner address can set this to true to halt the crowdsale due to emergency
     
 
     //Time Start and Time end
-    //Stage pre sale                                            //50%
+    //Stage pre sale 
+                                                                
+ 
     uint256 public icoStartTimestampStage = 1515974400;         //15/01/2018 @ 00:00am (UTC)
     uint256 public icoEndTimestampStage = 1518998399;           //18/02/2018 @ 11:59pm (UTC)
 
@@ -50,8 +53,8 @@ contract JubsICO is StandardToken {
     uint256 public icoEndTimestampStage3 = 1520812799;          //11/03/2018 @ 11:59pm (UTC)
 
     //Stage 4                                                   //10%
-    uint256 public icoStartTimestampStage4 = 1520812800;        //12/02/2018 @ 00:00am (UTC)
-    uint256 public icoEndTimestampStage4 = 1521417599;          //18/02/2018 @ 11:59pm (UTC)
+    uint256 public icoStartTimestampStage4 = 1520812800;        //12/03/2018 @ 00:00am (UTC)
+    uint256 public icoEndTimestampStage4 = 1521417599;          //18/03/2018 @ 11:59pm (UTC)
 
     //end of the waiting time for the team to withdraw 
     uint256 public teamEndTimestamp = 1579046400;               //01/15/2020 @ 12:00am (UTC) 
@@ -119,34 +122,28 @@ contract JubsICO is StandardToken {
  // ======================================== Modifier ==================================================
 
     modifier acceptsFunds() {   
-        require(icoStage >= 4)
-
         if (icoStage == 0) {
-            require(msg.value >= 1 ether);    
+            require(msg.value >= 1 ether);
             require(now >= icoStartTimestampStage);          
             require(now <= icoEndTimestampStage); 
         }
 
         if (icoStage == 1) {
-            require(msg.value >= 0.3 ether);
             require(now >= icoStartTimestampStage1);          
             require(now <= icoEndTimestampStage1);            
         }
 
         if (icoStage == 2) {
-            require(msg.value >= 0.3 ether);
             require(now >= icoStartTimestampStage2);          
             require(now <= icoEndTimestampStage2);            
         }
 
         if (icoStage == 3) {
-            require(msg.value >= 0.3 ether);
             require(now >= icoStartTimestampStage3);          
             require(now <= icoEndTimestampStage3);            
         }
 
         if (icoStage == 4) {
-            require(msg.value >= 0.3 ether);
             require(now >= icoStartTimestampStage4);          
             require(now <= icoEndTimestampStage4);            
         }             
@@ -162,8 +159,8 @@ contract JubsICO is StandardToken {
 
     modifier PauseEmergence {
         require(!pauseEmergence);
-        _;
-    }
+       _;
+    } 
 
 
 //========================================== Functions ===========================================================================
@@ -178,12 +175,18 @@ contract JubsICO is StandardToken {
         forwardFundsToWallet();
     } 
 
-    function forwardFundsToWallet() internal { 
-        // immediately send Ether to wallet address, propagates exception if execution fails       
-        walletETH.transfer(msg.value);              
+    function forwardFundsToWallet() internal {        
+        walletETH.transfer(msg.value);              // immediately send Ether to wallet address, propagates exception if execution fails
     }
 
-    function assignTokens(address recipient, uint256 amount) internal {        
+    function assignTokens(address recipient, uint256 amount) internal {
+        if (icoStage == 0) {
+          balances[preIcoWallet] = balances[preIcoWallet].sub(amount);               
+        }
+        if (icoStage > 0) {
+          balances[icoWallet] = balances[icoWallet].sub(amount);               
+        }
+
         balances[recipient] = balances[recipient].add(amount);
         tokensSold = tokensSold.add(amount);        
        
@@ -204,13 +207,13 @@ contract JubsICO is StandardToken {
     }
 
     function setRate(uint256 _rate) public onlyOwner { 
-        require(_rate < 0);               
+        require(_rate > 0);               
         rate = _rate;        
     }
 
     function setIcoStage(uint256 _icoStage) public onlyOwner {    
-        require(_icoStage <= 0); 
-        require(_icoStage >= 4);             
+        require(_icoStage >= 0); 
+        require(_icoStage <= 4);             
         icoStage = _icoStage;        
     }
 
