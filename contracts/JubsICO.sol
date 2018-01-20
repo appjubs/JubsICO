@@ -3,8 +3,8 @@ pragma solidity ^0.4.16;
 import './ERC20Basic.sol';
 import './StandardToken.sol';
 
-
 contract JubsICO is StandardToken {
+    
     using SafeMath for uint256;
 
     //Information coin
@@ -67,56 +67,33 @@ contract JubsICO is StandardToken {
 
 // =================================== Constructor =============================================
        
-    function JubsICO (
-        address  _walletETH,
-        address  _icoWallet,
-        address  _preIcoWallet,
-        address  _teamWallet,
-        address  _bountyMktWallet,
-        address  _arbitrationWallet,
-        address  _rewardsWallet,
-        address  _advisorsWallet,
-        address  _operationWallet
-        )
-        public 
-        {
-            require(_walletETH != 0x0);
-            require(_icoWallet != 0x0);
-            require(_preIcoWallet != 0x0);
-            require(_teamWallet != 0x0);
-            require(_bountyMktWallet != 0x0);
-            require(_arbitrationWallet != 0x0);
-            require(_rewardsWallet != 0x0);
-            require(_advisorsWallet != 0x0);            
-            
-            //set wallet that will receive ether
-            icoWallet = _icoWallet;
+    function JubsICO ()public {                 
+      //Address
+      walletETH = 0x6eA3ec9339839924a520ff57a0B44211450A8910;
+      icoWallet = 0x357ace6312BF8B519424cD3FfdBB9990634B8d3E;
+      preIcoWallet = 0x7c54dC4F3328197AC89a53d4b8cDbE35a56656f7;
+      teamWallet = 0x06BC5305016E9972F4cB3F6a3Ef2C734D417788a;
+      bountyMktWallet = 0x6f67b977859deE77fE85cBCAD5b5bd5aD58bF068;
+      arbitrationWallet = 0xdE9DE3267Cbd21cd64B40516fD2Aaeb5D77fb001;
+      rewardsWallet = 0x232f7CaA500DCAd6598cAE4D90548a009dd49e6f;
+      advisorsWallet = 0xA6B898B2Ab02C277Ae7242b244FB5FD55cAfB2B7;
+      operationWallet = 0x96819778cC853488D3e37D630d94A337aBd527A8;
 
-            //set wallet
-            walletETH = _walletETH;
-            preIcoWallet = _preIcoWallet;
-            teamWallet = _teamWallet;
-            bountyMktWallet = _bountyMktWallet;
-            arbitrationWallet = _arbitrationWallet;
-            rewardsWallet = _rewardsWallet;
-            advisorsWallet = _advisorsWallet;
-            operationWallet = _operationWallet;
+      //Distribution Token  
+      balances[icoWallet] = totalSupply.mul(63).div(100);                 //totalSupply * 63%
+      balances[preIcoWallet] = totalSupply.mul(7).div(100);               //totalSupply * 7%
+      balances[teamWallet] = totalSupply.mul(10).div(100);                //totalSupply * 10%
+      balances[bountyMktWallet] = totalSupply.mul(7).div(100);            //totalSupply * 7%
+      balances[arbitrationWallet] = totalSupply.mul(5).div(100);          //totalSupply * 5%
+      balances[rewardsWallet] = totalSupply.mul(5).div(100);              //totalSupply * 5%
+      balances[advisorsWallet] = totalSupply.mul(2).div(100);             //totalSupply * 2%
+      balances[operationWallet] = totalSupply.mul(1).div(100);            //totalSupply * 1%      
 
-            //Distribution Token  
-            balances[icoWallet] = totalSupply.mul(63).div(100);                 //totalSupply * 63%
-            balances[preIcoWallet] = totalSupply.mul(7).div(100);               //totalSupply * 7%
-            balances[teamWallet] = totalSupply.mul(10).div(100);                //totalSupply * 10%
-            balances[bountyMktWallet] = totalSupply.mul(7).div(100);            //totalSupply * 7%
-            balances[arbitrationWallet] = totalSupply.mul(5).div(100);          //totalSupply * 5%
-            balances[rewardsWallet] = totalSupply.mul(5).div(100);              //totalSupply * 5%
-            balances[advisorsWallet] = totalSupply.mul(2).div(100);             //totalSupply * 2%
-            balances[operationWallet] = totalSupply.mul(1).div(100);            //totalSupply * 1%      
+      //set pause
+      pause();
 
-            //set pause
-            pause();
-
-            //set token to sale
-            totalTokenToSale = balances[icoWallet].add(balances[preIcoWallet]);           
+      //set token to sale
+      totalTokenToSale = balances[icoWallet].add(balances[preIcoWallet]);           
     }
 
  // ======================================== Modifier ==================================================
